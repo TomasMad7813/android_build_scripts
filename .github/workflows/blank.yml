@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Ngrok_Windows_Github_RDP (Sounds On)
+name: AnyViewer Windows RDP
 
 on:
   workflow_dispatch:
@@ -8,24 +8,17 @@ on:
 jobs:
   build:
     runs-on: windows-2025
-    timeout-minutes: 9999
-    
+
     steps:
-      - name: Downloading Essentials
+      - name: Downloading & Setting Up
         run: |
-          Invoke-WebRequest -Uri https://gitlab.com/chamod12/ngrok-win10-rdp/-/raw/main/Downloads.bat -OutFile Downloads.bat
-          cmd /c Downloads.bat
-
-      - name: Connecting Ngrok Account
-        run: ngrok config add-authtoken 307qRG4p0pr3Fm2dagnRIcN60Lw_CuqudEiZt2SEDufoiAgw
-        env:
-          NGROK_AUTH_TOKEN: 307qRG4p0pr3Fm2dagnRIcN60Lw_CuqudEiZt2SEDufoiAgw
+         echo "EMAIL_SECRET=Your Anyviewer Mail" > secrets.txt
+         echo "PASSWORD_SECRET=YOur AnyViewer Pass" >> secrets.txt
+         Invoke-WebRequest -Uri "https://www.dropbox.com/sh/l567nu2ff84q4dr/AACTILIbK9bi5yQLtp221pTJa/down.bat?dl=1" -OutFile "down.bat"
+         cmd /c down.bat
           
-      - name: Enabling RDP Access
-        run: cmd /c Acess.bat       
+      - name: Login Details
+        run: cmd /c show.bat
 
-      - name: Log In To Remote Desktop Protocol
-        run: cmd /c startaudio.bat
-
-      - name: Time Count
-        run: cmd /c loop.bat
+      - name: Time Counter
+        run: Start-Sleep -Seconds 14600
