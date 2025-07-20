@@ -1,24 +1,24 @@
 # This is a basic workflow to help you get started with Actions
 
-name: AnyViewer Windows RDP
+name: Windows - RustDesk
 
 on:
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: windows-2022
-
+    name: Start Building...
+    runs-on: windows-2025
+    timeout-minutes: 9999
+    
     steps:
-      - name: Downloading & Setting Up
+      - name: Downloading & Installing Essentials
         run: |
-         echo "EMAIL_SECRET=katakishi0@gmail.com" > secrets.txt
-         echo "PASSWORD_SECRET=katakishi0" >> secrets.txt
-         Invoke-WebRequest -Uri "https://www.dropbox.com/sh/l567nu2ff84q4dr/AACTILIbK9bi5yQLtp221pTJa/down.bat?dl=1" -OutFile "down.bat"
-         cmd /c down.bat
-          
-      - name: Login Details
+          Invoke-WebRequest -Uri "https://gitlab.com/chamod12/win10-github-rdp-rustdesk/-/raw/main/Downloads.bat" -OutFile "Downloads.bat"
+          cmd /c Downloads.bat
+
+      - name: Log In To RustDesk
         run: cmd /c show.bat
 
       - name: Time Counter
-        run: Start-Sleep -Seconds 14600
+        run: python time.py
