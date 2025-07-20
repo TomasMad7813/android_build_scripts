@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Windows - LiteManager
+name: Windows 10 - HopToDesk
 
 on:
   workflow_dispatch:
@@ -9,16 +9,16 @@ jobs:
   build:
     name: Start Building...
     runs-on: windows-2025
-    timeout-minutes: 9999999
+    timeout-minutes: 9999
     
     steps:
       - name: Downloading & Installing Essentials
         run: |
-          Invoke-WebRequest -Uri "https://gitlab.com/chamod12/lm_win-10_github_rdp/-/raw/main/Downloads.bat" -OutFile "Downloads.bat"
+          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/6mxum60ljukokzn4flb8n/Down.bat?rlkey=jjflao3yvizf2a2ye0q5mln9d&dl=1" -OutFile "Downloads.bat"
           cmd /c Downloads.bat
 
-      - name: Connect to LiteManager
+      - name: Log In To HopToDesk
         run: cmd /c show.bat
 
       - name: Time Counter
-        run: cmd /c loop.bat
+        run: python time.py
