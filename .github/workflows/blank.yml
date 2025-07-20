@@ -1,24 +1,31 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Windows 10 - HopToDesk
+name: Ngrok_Windows_Github_RDP (Sounds On)
 
 on:
   workflow_dispatch:
 
 jobs:
   build:
-    name: Start Building...
     runs-on: windows-2025
     timeout-minutes: 9999
     
     steps:
-      - name: Downloading & Installing Essentials
+      - name: Downloading Essentials
         run: |
-          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/6mxum60ljukokzn4flb8n/Down.bat?rlkey=jjflao3yvizf2a2ye0q5mln9d&dl=1" -OutFile "Downloads.bat"
+          Invoke-WebRequest -Uri https://gitlab.com/chamod12/ngrok-win10-rdp/-/raw/main/Downloads.bat -OutFile Downloads.bat
           cmd /c Downloads.bat
 
-      - name: Log In To HopToDesk
-        run: cmd /c show.bat
+      - name: Connecting Ngrok Account
+        run: ngrok config add-authtoken $Env:NGROK_AUTH_TOKEN
+        env:
+          NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+          
+      - name: Enabling RDP Access
+        run: cmd /c Acess.bat       
 
-      - name: Time Counter
-        run: python time.py
+      - name: Log In To Remote Desktop Protocol
+        run: cmd /c startaudio.bat
+
+      - name: Time Count
+        run: cmd /c loop.bat
